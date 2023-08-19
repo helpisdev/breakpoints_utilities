@@ -1,0 +1,75 @@
+name: utilities
+repository: https://github.com/helpisdev/utilities.git
+packages:
+  - packages/**
+  - .
+
+ignore:
+  - "packages/**/example"
+  - "packages/**/examples"
+  - "examples"
+
+sdkPath: auto
+command:
+  bootstrap:
+    usePubspecOverrides: true
+  version:
+    includeCommitId: true
+    linkToCommits: true
+    workspaceChangelog: true
+    updateGitTagRefs: true
+    includeScopes: true
+    branch: main
+scripts:
+  config:
+    select-package:
+      flutter: true
+    exec: "flutter config --enable-web --enable-macos-desktop --enable-linux-desktop --enable-windows-desktop --enable-ios --enable-android --single-widget-reload-optimization"
+  get:
+    exec: flutter packages pub get
+  upgrade:
+    exec: flutter pub upgrade
+  upgrade:major:
+    exec: flutter pub upgrade --major-versions
+  flutter:clean:
+    select-package:
+      flutter: true
+    exec: flutter clean
+  format:check:
+    exec: dart format --set-exit-if-changed .
+  format:fix:
+    exec: dart format --fix .
+  lint:
+    exec: dart fix --dry-run
+  fix:
+    exec: dart fix --apply
+  analyze:
+    exec: dart analyze --fatal-infos
+  test:
+    exec: flutter test
+  test:integration:
+    select-package:
+      flutter: true
+    exec: flutter drive
+  test:benchmark:
+    select-package:
+      flutter: true
+    exec: flutter test test_benchmark
+  test:goldens:
+    select-package:
+      flutter: true
+    exec: flutter test --update-goldens --tags=golden
+  test:coverage:
+    select-package:
+      flutter: true
+    exec: flutter test --coverage --merge-coverage --no-pub
+  gen:coverage:
+    exec: "$MELOS_ROOT_PATH/tool/combine_coverage.sh"
+  gen:coverage:html:
+    exec: "genhtml $MELOS_ROOT_PATH/coverage/lcov.info -o $MELOS_ROOT_PATH/coverage/html"
+  build:debug:
+    exec: flutter build -v $1
+  build:release:
+    exec: flutter build -v --release $1
+  fastlane:
+    run: bundle exec fastlane $1
