@@ -33,4 +33,4 @@ build/
 .metadata
 
 # Ignore pubspec.lock from now on since it registers local dependencies that differ from machine to machine
-pubspec.lock
+/pubspec.lock
