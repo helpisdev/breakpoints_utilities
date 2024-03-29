@@ -3,12 +3,12 @@ description: Breakpoint utilities for Dart and Flutter projects.
 version: 0.0.2
 
 environment:
-  sdk: ">=3.2.4 <4.0.0"
-  flutter: ">=3.16.7 <4.0.0"
+  sdk: ">=3.3.3 <4.0.0"
+  flutter: ">=3.19.5 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
 
 dev_dependencies:
-  melos: ^4.0.0
+  melos: ^5.2.2
